@@ -4,6 +4,10 @@ const passport = require('passport');
 
 
 function authController() {
+    const _getRedirectUrl = (req) => {
+        return req.user.role === 'admin' ? '/admin/orders' : '/customers/orders'
+    }
+
     return {
         login(req, res) {
             res.render('auth/login')
@@ -11,7 +15,7 @@ function authController() {
 
         postLogin(req, res, next) {
             const {email, password} = req.body
-            
+
             // Validate request
             if (!email && !password) {
                 req.flash('error', 'All fields are required');
@@ -34,7 +38,8 @@ function authController() {
                         return next(err)
                     }
 
-                    return res.redirect('/');
+
+                    return res.redirect(_getRedirectUrl(req));
                 })
             })(req, res, next)
         },
@@ -49,7 +54,7 @@ function authController() {
             var email = req.body.email;
             var password = req.body.password;
 
-            console.log(name);
+            // console.log(name);
 
             // Validate request
             if (!name && !email && !password) {
@@ -86,7 +91,7 @@ function authController() {
                 return res.redirect('/')
             }).catch(err => {
                 req.flash('error', 'Something went wrong')
-                console.log(err);
+                // console.log(err);
                 return res.redirect('/register')
             })
 
