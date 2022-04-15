@@ -1,39 +1,40 @@
-<section class="login flex justify-center pt-24">
-    <div class="w-full max-w-xs">
-        <form action="/login" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+<div class="containerForm">
+  <div class="form">
+    <div class="register-info">
+      <!-- <h3 class="title">Welcome to Pizza Store!</h3> -->
+      <p class="">
+        <img src="img/auth.jpg" alt="" >
+      </p>
+    </div>
+    <div class="contact-form">
+      <span class="circle one"></span>
+      <span class="circle two"></span>
 
-          
-         <% if(messages.error) { %>
+      <form action="/login" method="POST">
 
-          <span class="text-red-500 text-sm"><%= messages.error %></span>
-          <% } %>
+        <% if(messages.error) { %>
+          <span class="text-red-800 text-xl"><%= messages.error %></span>
+          <% } %>  
 
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-              Email
-            </label>
-            <input name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="email" placeholder="Enter your email">
-          </div>
+        <h3 class="title py-3 items-center">Welcome To Pizza Store!</h3>
+        <div class="input-container ">
+          <input type="email" name="email" value="<%= messages.email%>" class="input" />
+          <label for="">Email</label>
+          <span>Email</span>
+        </div>
+        <div class="input-container">
+          <input type="password"name="password" value="" class="input" />
+          <label for=""> Password</label>
+          <span> Password</span>
+        </div>
+        <button type="submit" class="btn py-8">Log In</button>
+        <a class="inline-block align-baseline font-bold py-4 " href="/register" style="color:#fff; font-size: medium; ">
+          Don't have account?
+        </a>
+      </form>
+    </div>
+    
+  </div>
+</div>
 
-          <div class="mb-6">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-              Password
-            </label>
-            <input name="password" class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************">
-          </div>
-          
-          <div class="flex items-center justify-between">
-            <button class=" btn-primary rounded-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-              Log In
-            </button>
-            <a class="inline-block align-baseline font-bold text-sm " href="/register">
-              Don't have account?
-            </a>
-          </div>
-        </form>
-        <p class="text-center text-gray-500 text-xs">
-          &copy;2022 Pizza. All rights reserved.
-        </p>
-      </div>
 
-</section>

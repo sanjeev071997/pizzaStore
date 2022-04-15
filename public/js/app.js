@@ -5375,6 +5375,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin */ "./resources/js/admin.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _contact__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./contact */ "./resources/js/contact.js");
+/* harmony import */ var _darkMode__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./darkMode */ "./resources/js/darkMode.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -5382,6 +5384,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+
+
+ // import { initStripe } from './stripe';
 
 
 
@@ -5460,18 +5465,17 @@ function updateStatus(order) {
 
 updateStatus(order); // Socket
 
-var socket = io();
-(0,_admin__WEBPACK_IMPORTED_MODULE_2__.initAdmin)(socket); // Join
+var socket = io(); // Join
 
 if (order) {
   socket.emit('join', "order_".concat(order._id));
 } // Admin 
 
 
-var adminAreaPath = window.location.pathname;
-console.log(adminAreaPath);
+var adminAreaPath = window.location.pathname; // console.log(adminAreaPath)
 
 if (adminAreaPath.includes('admin')) {
+  (0,_admin__WEBPACK_IMPORTED_MODULE_2__.initAdmin)(socket);
   socket.emit('join', 'adminRoom');
 }
 
@@ -5490,6 +5494,82 @@ socket.on('orderUpdated', function (data) {
 
   }).show();
 });
+window.addEventListener("contextmenu", function (e) {
+  return e.preventDefault();
+});
+
+/***/ }),
+
+/***/ "./resources/js/contact.js":
+/*!*********************************!*\
+  !*** ./resources/js/contact.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "inputs": () => (/* binding */ inputs)
+/* harmony export */ });
+var inputs = document.querySelectorAll(".input");
+
+function focusFunc() {
+  var parent = this.parentNode;
+  parent.classList.add("focus");
+}
+
+function blurFunc() {
+  var parent = this.parentNode;
+
+  if (this.value == "") {
+    parent.classList.remove("focus");
+  }
+}
+
+inputs.forEach(function (input) {
+  input.addEventListener("focus", focusFunc);
+  input.addEventListener("blur", blurFunc);
+});
+
+/***/ }),
+
+/***/ "./resources/js/darkMode.js":
+/*!**********************************!*\
+  !*** ./resources/js/darkMode.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "options": () => (/* binding */ options)
+/* harmony export */ });
+var options = {
+  bottom: '32px',
+  // default: '32px'
+  right: '32px',
+  // default: '32px'
+  left: 'unset',
+  // default: 'unset'
+  time: '0.10s',
+  // default: '0.3s'
+  mixColor: '#303030 ',
+  // default: '#fff' rgb(41, 69, 66)
+  backgroundColor: '#fff',
+  // default: '#fff'
+  buttonColorDark: '#100f2c',
+  // default: '#100f2c'
+  buttonColorLight: '#fff',
+  // default: '#fff'
+  saveInCookies: true,
+  // default: true,
+  label: '🌓',
+  // default: ''
+  autoMatchOsTheme: false // default: true
+
+};
+var darkmode = new Darkmode(options);
+darkmode.showWidget();
 
 /***/ }),
 

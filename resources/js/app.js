@@ -2,6 +2,10 @@ import axios from 'axios';
 import Noty from 'Noty';
 import { initAdmin } from './admin';
 import moment from 'moment';
+// import { initStripe } from './stripe';
+import  './contact';
+import './darkMode';
+
 
 let addToCart = document.querySelectorAll('.add-to-cart');
 let cartCounter = document.querySelector('#cartCounter');
@@ -87,7 +91,6 @@ updateStatus(order);
 
 // Socket
 let socket = io()
-initAdmin(socket);
 
 // Join
 if(order) {
@@ -96,8 +99,9 @@ if(order) {
 
 // Admin 
 let adminAreaPath = window.location.pathname
-console.log(adminAreaPath)
+// console.log(adminAreaPath)
 if (adminAreaPath.includes('admin')) {
+    initAdmin(socket);
     socket.emit('join','adminRoom')
 }
 
@@ -116,4 +120,10 @@ socket.on('orderUpdated', (data) => {
       }).show();
 
 })
+
+window.addEventListener("contextmenu",(e) => e.preventDefault());
+
+
+
+
 

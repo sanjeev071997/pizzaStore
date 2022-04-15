@@ -13,8 +13,7 @@ const passport = require('passport');
 const Emitter = require('events');
 
 // Database connection
-const url = 'mongodb://localhost:27017/Pizza';
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGO_CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true})
 .then(()=>{
     console.log("Database connected... ");
 }).catch ((error)=>{
@@ -22,10 +21,10 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true})
 });
 
 // Session store  // old Version 
-// let mongoStore = new MongoDbStore({
-//     mongoUrl: 'mongodb://localhost:27017/Pizza',
-//     collection: 'sessions'
-//   });
+let mongoStore = new MongoDbStore({
+    mongoUrl: 'mongodb://localhost:27017/Pizza',
+    collection: 'sessions'
+  });
 
 // Event emitter
 const eventEmitter = new Emitter()
@@ -36,14 +35,10 @@ app.set('eventEmitter', eventEmitter)
 app.use(session({
     secret: process.env.COOKIE_SECRET,
     resave: false,
-    store: MongoDbStore.create({
-        mongoUrl: 'mongodb://localhost:27017/Pizza',
-        // collection: 'sessions'
-    }),
+    store: mongoStore,
     saveUninitialized: false,
     cookie: { maxAge: 1000 * 60 * 60 * 24 } // 24 Hours
 }))
-
 // Passport config
 const passportInit = require('./app/config/passport')
 passportInit(passport);
@@ -73,6 +68,10 @@ app.set ('view engine', 'ejs');
 
 // Routes
 require('./routes/web.js')(app)
+app.use((req, res) => {
+    res.status(404).render('errors/404')
+})
+
 
 const server = app.listen(PORT , () =>{
     console.log(`Listening on port ${PORT}`)
@@ -96,3 +95,4 @@ eventEmitter.on('orderUpdated',(data) => {
 eventEmitter.on('orderPlaced',(data) => {
     io.to('adminRoom').emit('orderPlaced',data)
 })
+
