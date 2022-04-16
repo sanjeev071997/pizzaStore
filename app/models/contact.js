@@ -1,4 +1,3 @@
-const { message } = require('laravel-mix/src/Log');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -16,6 +15,5 @@ const contactSchema = new Schema({
 
 }, {timestamps: true });
 
-// const User = new  mongoose.model('User', userSchema);
 
 module.exports =  mongoose.model('Contact', contactSchema);
