@@ -22,7 +22,7 @@ mongoose.connect(process.env.MONGO_CONNECTION_URL, { useNewUrlParser: true, useU
 
 // Session store  // old Version 
 let mongoStore = new MongoDbStore({
-    mongoUrl: 'mongodb://localhost:27017/Pizza',
+    mongoUrl: 'mongodb+srv://sanjeevkumar:sanjeevkumar19970@cluster0.zwmdq.mongodb.net/Pizza?retryWrites=true&w=majority',
     collection: 'sessions'
   });
 

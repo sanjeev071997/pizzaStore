@@ -15,7 +15,7 @@ const admin = require('../app/http/middleware/admin');
 
 function initRoutes(app) {
     // Pages
-    app.get('/home', homeController().index); 
+    app.get('/', homeController().index); 
 
     app.get('/about',aboutController().about);
 

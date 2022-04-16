@@ -4,7 +4,7 @@ function guest (req, res, next) {
         return next()
     }
 
-    return res.redirect('/home')
+    return res.redirect('/')
 }
 
 module.exports = guest;
