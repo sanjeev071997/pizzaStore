@@ -5386,7 +5386,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
- // import { initStripe } from './stripe';
 
 
 
@@ -5395,14 +5394,12 @@ var cartCounter = document.querySelector('#cartCounter');
 
 function updateCart(pizza) {
   axios__WEBPACK_IMPORTED_MODULE_0___default().post('/update-cart', pizza).then(function (res) {
-    // console.log(res);
     cartCounter.innerText = res.data.totalQty;
     new (Noty__WEBPACK_IMPORTED_MODULE_1___default())({
       type: 'success',
       timeout: 1000,
       text: "Item added to cart",
-      progressBar: false // layout: 'topLeft'
-
+      progressBar: false
     }).show();
   })["catch"](function (err) {
     new (Noty__WEBPACK_IMPORTED_MODULE_1___default())({
@@ -5416,8 +5413,7 @@ function updateCart(pizza) {
 
 addToCart.forEach(function (btn) {
   btn.addEventListener('click', function (e) {
-    var pizza = JSON.parse(btn.dataset.pizza); // console.log(pizza)
-
+    var pizza = JSON.parse(btn.dataset.pizza);
     updateCart(pizza);
   });
 }); // Remove alert message after 3 seconds
@@ -5436,7 +5432,7 @@ var statuses = document.querySelectorAll('.status_line'); // console.log(statuse
 var hiddenInput = document.querySelector('#hiddenInput');
 var order = hiddenInput ? hiddenInput.value : null;
 order = JSON.parse(order);
-var time = document.createElement('small'); // console.log(order);
+var time = document.createElement('small');
 
 function updateStatus(order) {
   statuses.forEach(function (status) {
@@ -5472,7 +5468,7 @@ if (order) {
 } // Admin 
 
 
-var adminAreaPath = window.location.pathname; // console.log(adminAreaPath)
+var adminAreaPath = window.location.pathname;
 
 if (adminAreaPath.includes('admin')) {
   (0,_admin__WEBPACK_IMPORTED_MODULE_2__.initAdmin)(socket);
@@ -5483,15 +5479,13 @@ socket.on('orderUpdated', function (data) {
   var updatedOrder = _objectSpread({}, order);
 
   updatedOrder.updatedAt = moment__WEBPACK_IMPORTED_MODULE_3___default()().format();
-  updatedOrder.status = data.status; // console.log(data)
-
+  updatedOrder.status = data.status;
   updateStatus(updatedOrder);
   new (Noty__WEBPACK_IMPORTED_MODULE_1___default())({
     type: 'success',
     timeout: 1000,
     text: "Order updated",
-    progressBar: false // layout: 'topLeft'
-
+    progressBar: false
   }).show();
 });
 window.addEventListener("contextmenu", function (e) {

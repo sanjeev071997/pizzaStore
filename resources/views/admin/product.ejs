@@ -1,0 +1,52 @@
+<div class="containerForm">
+    <div class="form">
+      <div class="register-info">
+        <p>
+          <img src="https://thumbs.dreamstime.com/b/boy-chef-cartoon-illustration-95712944.jpg" alt="Product Image" >
+       </p>
+
+      </div>
+  
+      <div class="contact-form">
+        <span class="circle one"></span>
+        <span class="circle two"></span>
+        
+        <form action="/admin/product" method="POST" enctype="multipart/form-data">
+  
+          <% if(messages.error) { %>
+            <span class="text-red-800 text-xl"><%= messages.error %></span>
+            <% } %>  
+  
+          <h3 class="title py-3 items-center">Create Product!</h3>
+          <div class="input-container">
+            <input type="text" name="name" class="input" required minlength="3" />
+            <label for="">Product Name</label>
+            <span>Product Name</span>
+          </div>
+          <div class="input-container ">
+            <input type="text" name="price" class="input" required />
+            <label for="">Product Price</label>
+            <span>Product Price</span>
+          </div>
+          <div class="input-container">
+            <select name="size" id="" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" required>
+                <option value="SMALL">Product Size</option>
+                <option value="SMALL">SMALL</option>
+                <option value="MEDIUM">MEDIUM</option>
+                <option value="LARGE">LARGE</option>
+                <option value="EXTER LARGE">EXTER LARGE</option>
+              </select>           
+          </div>
+          <div class="input-container">
+            <input type="file" name="image" id="image" required >
+          </div>
+          <button type="submit" class="btn py-8">Create Product</button>
+        </form>
+        <button><a href="orders" class="py-1 px-6 rounded-full flex items-center font-bold p-8" style="background-color: #FE5F1E; color: #fff;">Go Back Orders </a> </button> 
+        <br>
+        
+    </div>
+    </div>
+</div>  
+  
+  

@@ -2,7 +2,6 @@ import axios from 'axios';
 import Noty from 'Noty';
 import { initAdmin } from './admin';
 import moment from 'moment';
-// import { initStripe } from './stripe';
 import  './contact';
 import './darkMode';
 
@@ -13,15 +12,12 @@ let cartCounter = document.querySelector('#cartCounter');
 
 function updateCart(pizza) {
     axios.post('/update-cart',pizza).then(res => {
-        // console.log(res);
         cartCounter.innerText = res.data.totalQty
-
         new Noty({
             type: 'success',
             timeout: 1000,
             text: "Item added to cart",
             progressBar: false,
-            // layout: 'topLeft'
           }).show();
     }).catch(err => {
         new Noty({
@@ -30,15 +26,11 @@ function updateCart(pizza) {
             text: "Something went wrong",
             progressBar: false,
           }).show();
-
     })
-
 }
-
 addToCart.forEach((btn) => {
     btn.addEventListener('click',(e) => {
         let pizza = JSON.parse(btn.dataset.pizza)
-        // console.log(pizza)
         updateCart(pizza)
     })
 })
@@ -52,7 +44,6 @@ if (alertMsg) {
     
 }
 
-
 // Change order status
 let statuses = document.querySelectorAll('.status_line')
 // console.log(statuses)
@@ -60,8 +51,6 @@ let hiddenInput = document.querySelector('#hiddenInput')
 let order = hiddenInput ? hiddenInput. value: null
 order = JSON.parse(order)
 let time = document.createElement('small')
-
-// console.log(order);
 
 function updateStatus(order) {
     statuses.forEach((status) => {
@@ -82,9 +71,7 @@ function updateStatus(order) {
                 status.nextElementSibling.classList.add('current')
             }
         }
-
     })
-
 }
 
 updateStatus(order);
@@ -99,24 +86,20 @@ if(order) {
 
 // Admin 
 let adminAreaPath = window.location.pathname
-// console.log(adminAreaPath)
 if (adminAreaPath.includes('admin')) {
     initAdmin(socket);
     socket.emit('join','adminRoom')
 }
-
 socket.on('orderUpdated', (data) => {
     const updatedOrder = {...order}
     updatedOrder.updatedAt = moment().format()
     updatedOrder.status = data.status
-    // console.log(data)
     updateStatus(updatedOrder);
     new Noty({
         type: 'success',
         timeout: 1000,
         text: "Order updated",
         progressBar: false,
-        // layout: 'topLeft'
       }).show();
 
 })
