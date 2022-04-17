@@ -19,7 +19,7 @@
   
           <h3 class="title py-3 items-center">Create Product!</h3>
           <div class="input-container">
-            <input type="text" name="name" class="input" required minlength="3" />
+            <input type="text" name="name" class="input" required  />
             <label for="">Product Name</label>
             <span>Product Name</span>
           </div>
@@ -29,7 +29,7 @@
             <span>Product Price</span>
           </div>
           <div class="input-container">
-            <select name="size" id="" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" required>
+            <select name="size" id="" class="input" style="background-color:#1abc9c;" required>
                 <option value="SMALL">Product Size</option>
                 <option value="SMALL">SMALL</option>
                 <option value="MEDIUM">MEDIUM</option>
@@ -38,7 +38,7 @@
               </select>           
           </div>
           <div class="input-container">
-            <input type="file" name="image" id="image" required >
+            <input type="file" name="image" id="image" class="input" required />
           </div>
           <button type="submit" class="btn py-8">Create Product</button>
         </form>
