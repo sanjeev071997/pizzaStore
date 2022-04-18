@@ -7,7 +7,7 @@ function homeController() {
             return res.render('pages/home', { pizzas: pizzas })
         },
         postIndex(req, res) {
-            const {name, price, size} = req.body
+            const {name, price, size} = req.body 
             const image = req.file.filename
           // Validate request
           if (!name && !image && !price && !size) {
