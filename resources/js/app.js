@@ -104,7 +104,7 @@ socket.on('orderUpdated', (data) => {
 
 })
 
-// window.addEventListener("contextmenu",(e) => e.preventDefault()); 
+window.addEventListener("contextmenu",(e) => e.preventDefault()); 
 
 
 

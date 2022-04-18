@@ -5487,7 +5487,10 @@ socket.on('orderUpdated', function (data) {
     text: "Order updated",
     progressBar: false
   }).show();
-}); // window.addEventListener("contextmenu",(e) => e.preventDefault());
+});
+window.addEventListener("contextmenu", function (e) {
+  return e.preventDefault();
+});
 
 /***/ }),
 
