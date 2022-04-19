@@ -12,8 +12,6 @@ const MongoDbStore = require('connect-mongo');
 const passport = require('passport');
 const Emitter = require('events');
 
-app.use(express.static(__dirname+"./public/"));
-
 // Database connection
 mongoose.connect(process.env.MONGO_CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true})
 .then(()=>{
