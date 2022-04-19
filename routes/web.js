@@ -18,7 +18,7 @@ const multer = require('multer');
 const storage = multer.diskStorage({
     // destination for files
     destination:function(req, file, callback){
-        callback(null, "./public/uploads/");
+        callback(null, "./public/img/");
     },
     //add back the extension
   filename: function (req, file, callback) {

@@ -1,4 +1,12 @@
 const Menu = require('../../../models/menu');
+const cloudinary = require('cloudinary');
+
+// Cloudinary config
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret:process.env.CLOUDINARY_API_SECRET
+})
 
 function homeController() {
     return {
@@ -6,7 +14,8 @@ function homeController() {
             const pizzas  = await Menu.find()
             return res.render('pages/home', { pizzas: pizzas })
         },
-        postIndex(req, res) {
+        async postIndex(req, res) {
+            const result =await cloudinary.v2.uploader.upload(req.file.path)
             const {name, price, size} = req.body 
             const image = req.file.filename
           // Validate request
@@ -21,7 +30,7 @@ function homeController() {
            // Create product 
            const menus = new Menu({
              name: name,
-             image: image,
+             image: result.secure_url,
              price: price,
              size: size,
          })
